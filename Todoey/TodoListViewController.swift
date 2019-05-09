@@ -12,9 +12,14 @@ class TodoListViewController: UITableViewController {
 
     var itemArray = ["Manny", "Moe", "Jack"]
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
       
     }
 
@@ -46,7 +51,28 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
-    @IBAction func addItem(_ sender: Any) {
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
+       
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            self.itemArray.append(textField.text!)
+            
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
+            self.tableView.reloadData()
+        }
+
+        alert.addTextField { (alertTextfield) in
+            alertTextfield.placeholder = "Create new item"
+           textField = alertTextfield //extending scope..
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
     }
+    
+    
 }

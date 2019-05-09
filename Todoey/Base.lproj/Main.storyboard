@@ -36,7 +36,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="80A-Ed-Cgg">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="addItem:" destination="md9-RG-l9t" id="LPs-To-rlD"/>
+                                <action selector="addButtonPressed:" destination="md9-RG-l9t" id="cKo-Kw-6UQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
