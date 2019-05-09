@@ -47,14 +47,18 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //can UPDATE NSManagedObject:
-        //itemArray[indexPath.row].setValue("Completed", forKey: "title")
+        performSegue(withIdentifier: "goToItems", sender: self)
         
-        //categoryArray[indexPath.row].done = !categoryArray[indexPath.row].done
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! TodoListViewController
         
-        saveCategory()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+            
+        }
         
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
